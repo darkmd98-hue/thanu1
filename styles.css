@@ -4,6 +4,16 @@
     box-sizing: border-box;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+img,
+video,
+audio {
+    max-width: 100%;
+}
+
 body {
     font-family: 'Georgia', serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -16,6 +26,7 @@ body {
     padding: 80px 20px;
     display: none;
     animation: fadeIn 1s ease-in;
+    width: 100%;
 }
 
 .section.active {
@@ -38,11 +49,13 @@ body {
 .landing-content {
     text-align: center;
     z-index: 10;
+    width: min(100%, 680px);
+    margin: 0 auto;
 }
 
 .photo-frame {
-    width: 300px;
-    height: 300px;
+    width: min(300px, calc(100vw - 64px));
+    height: min(300px, calc(100vw - 64px));
     margin: 0 auto 30px;
     border-radius: 50%;
     overflow: hidden;
@@ -67,14 +80,16 @@ body {
 }
 
 .typing-text {
-    font-size: 2.5em;
+    font-size: clamp(1.6rem, 5vw, 2.5rem);
     margin: 30px 0;
     animation: typing 3s steps(50) 1s forwards, blink 0.75s step-end infinite;
-    white-space: nowrap;
+    white-space: normal;
     overflow: hidden;
-    border-right: 3px solid #fff;
-    max-width: fit-content;
+    overflow-wrap: anywhere;
+    border-right: none;
+    max-width: 100%;
     margin: 30px auto;
+    line-height: 1.2;
 }
 
 @keyframes typing {
@@ -97,6 +112,7 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     transition: all 0.3s;
     animation: pulse 2s infinite;
+    max-width: 100%;
 }
 
 .enter-btn:hover {
@@ -591,9 +607,7 @@ h2 {
 
 @media (max-width: 768px) {
     .typing-text {
-        font-size: 1.5em;
-        white-space: normal;
-        border-right: none;
+        animation: none;
     }
     
     h2 {
@@ -628,6 +642,11 @@ h2 {
     
     #navbar li {
         margin: 5px 8px;
+    }
+
+    .enter-btn {
+        padding: 15px 24px;
+        font-size: 1rem;
     }
 }
 
@@ -1560,6 +1579,10 @@ h2 {
         line-height: 1.25;
     }
 
+    .section {
+        min-height: 100svh;
+    }
+
     .timeline-content,
     .quiz-start,
     .quiz-game,
@@ -1575,5 +1598,13 @@ h2 {
     .letter-paper {
         padding-left: 22px;
         padding-right: 22px;
+    }
+}
+
+@media (min-width: 769px) {
+    .typing-text {
+        white-space: nowrap;
+        border-right: 3px solid #fff;
+        max-width: fit-content;
     }
 }
